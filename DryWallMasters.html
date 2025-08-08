@@ -46,11 +46,23 @@
 
     .header-nav {
       background-color: var(--header-footer-bg); /* White background */
-      padding: 16px 0;
+      padding: 16px 0; /* Vertical padding only, horizontal handled by inner container */
       display: flex;
-      justify-content: space-between; /* Distributes items */
+      justify-content: center; /* Center the inner container */
       align-items: center;
       flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    /* Inner container for header content to keep it centered and max-width */
+    .header-nav .inner-header-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 24px; /* Horizontal padding for content */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
     }
 
     .header-left-area,
@@ -275,6 +287,22 @@
         line-height: 1.5;
         color: var(--secondary-text-color);
         margin-bottom: 0;
+    }
+
+    .service-card .contact-btn {
+        background-color: var(--accent-blue);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 15px; /* Added margin to separate from text */
+    }
+
+    .service-card .contact-btn:hover {
+        background-color: var(--accent-red);
     }
 
     /* Styles for images in About Drywall Masters section */
@@ -724,9 +752,13 @@
       .logo-image {
         margin: 0 auto; /* Center image within its link/container */
       }
+      .header-nav .inner-header-container { /* Adjust inner container for mobile */
+        padding: 0; /* Remove horizontal padding */
+        flex-direction: column; /* Stack items */
+      }
       .header-nav {
-        justify-content: center; /* Center items in the header on mobile */
-        flex-direction: column; /* Stack items vertically */
+        padding-left: 24px; /* Apply padding directly to nav for mobile */
+        padding-right: 24px; /* Apply padding directly to nav for mobile */
       }
       .why-choose-us-list {
           grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
@@ -769,17 +801,19 @@
 </head>
 <body>
   <header>
-    <nav class="header-nav container">
-      <div class="header-left-area"></div> <!-- Left flexible area for spacing -->
-      <a href="/" class="logo-link">
-        <img src="https://img1.wsimg.com/isteam/ip/3f19cf0c-8a97-4b7d-a044-703ca182e60f/logo-png.png/:/rs=h:75,cg:true,m/qt=q:95" alt="Drywall Masters LLC Logo" class="logo-image">
-      </a>
-      <div class="header-right-area">
-        <ul class="nav-menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
+    <nav class="header-nav">
+      <div class="inner-header-container"> <!-- Added inner container for content -->
+        <div class="header-left-area"></div> <!-- Left flexible area for spacing -->
+        <a href="/" class="logo-link">
+          <img src="https://img1.wsimg.com/isteam/ip/3f19cf0c-8a97-4b7d-a044-703ca182e60f/logo-png.png/:/rs=h:75,cg:true,m/qt=q:95" alt="Drywall Masters LLC Logo" class="logo-image">
+        </a>
+        <div class="header-right-area">
+          <ul class="nav-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
       <!-- Hamburger menu for mobile will be implemented with JS if needed -->
     </nav>
@@ -788,7 +822,7 @@
     <section class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">Professional Drywall Contractor</h1>
-        <a href="/contact" class="cta-button">Get a Free Quote Today!</a>
+        <a href="#emailInput" class="cta-button">Get a Free Quote Today!</a>
       </div>
     </section>
     <section class="content-section container">
@@ -882,7 +916,7 @@
         </div>
       </div>
       <div style="text-align: center; margin-top: 50px;">
-        <a href="/contact" class="cta-button">Get Your Free Estimate!</a>
+        <a href="#emailInput" class="cta-button">Get Your Free Estimate!</a>
       </div>
     </section>
     <hr>
@@ -1068,6 +1102,26 @@
   </footer>
 
   <script>
+    // Smooth scroll to element
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Optional: Focus the input field after scrolling
+                if (targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA') {
+                    targetElement.focus();
+                }
+            }
+        });
+    });
+
     // Simple JavaScript for floating labels (if not handled by a framework)
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
