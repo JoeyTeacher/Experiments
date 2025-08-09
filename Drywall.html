@@ -322,6 +322,30 @@
         display: block;
     }
 
+    /* Styles for About section text containers */
+    .about-text-container {
+        background-color: var(--card-bg-color);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        text-align: center; /* Centered text within these containers */
+    }
+
+    .about-headline {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 22px; /* Increased font size */
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--accent-blue); /* Accent color for headlines */
+    }
+
+    .about-text-container p {
+        font-size: 16px; /* Consistent font size */
+        line-height: 1.6em; /* Increased line height for readability */
+        color: var(--primary-text-color);
+    }
+
     /* Styles for Gallery images */
     .gallery-grid { /* Renamed from services-grid for clarity in gallery section */
         display: grid;
@@ -594,6 +618,7 @@
         font-weight: 700;
     }
 
+    /* Removed Jeff's bio section as per the request to focus on the business, not individuals */
     /* New sections for Why Choose Us and Testimonials */
     .why-choose-us-section,
     .testimonials-section {
@@ -865,32 +890,6 @@
         left: 0; /* Slide in */
         display: flex; /* Make visible when open */
       }
-      /* Mobile specific layout for carousel controls */
-      .testimonial-carousel-container {
-        flex-direction: column; /* Stack items vertically */
-      }
-      .testimonial-carousel {
-        order: 0; /* Carousel first */
-      }
-      .carousel-nav-btn {
-        position: static; /* Remove absolute positioning */
-        transform: none; /* Remove transform */
-        margin: 10px auto; /* Center buttons below carousel */
-        width: 50px; /* Make buttons a bit wider for mobile */
-        height: 50px; /* Make buttons a bit taller for mobile */
-      }
-      .prev-btn {
-        order: 1; /* Place after carousel */
-      }
-      .next-btn {
-        order: 2; /* Place after prev button */
-      }
-      .carousel-dots-container {
-        order: 3; /* Place dots last */
-        margin-top: 10px; /* Space from buttons */
-        margin-left: auto; /* Center dots */
-        margin-right: auto; /* Center dots */
-      }
     }
 
     @media (max-width: 767px) {
@@ -1074,14 +1073,14 @@
                     <img src="https://i.imgur.com/BpBW3k9.jpg" alt="Drywall contractor inspecting finished wall - Our Expertise" class="content-image">
                 </div>
                 <h4 class="about-headline">Our Expertise</h4>
-                <p style="text-align: center;">Drywall Masters LLC is a locally owned and operated drywall contractor. We're highly skilled in all aspects of drywall installation and repair. We're always committed to doing the highest quality work. We serve the entire Twin Cities area. With <strong>over 7,000 hours and 12 years of experience</strong> honing our craft, you can rest assured that you're in good hands.</p>
+                <p style="text-align: center; line-height: 1.6em;">Drywall Masters LLC is a locally owned and operated drywall contractor. We're highly skilled in all aspects of drywall installation and repair. We're always committed to doing the highest quality work. We serve the entire Twin Cities area. With <strong>over 7,000 hours and 12 years of experience</strong> honing our craft, you can rest assured that you're in good hands.</p>
             </div>
             <div class="grid-cell">
                 <div class="about-image-wrapper">
                     <img src="https://i.imgur.com/qVFzxwu.jpg" alt="Drywall contractor and client reviewing plans - Our Process" class="content-image">
                 </div>
                 <h4 class="about-headline">Our Process</h4>
-                <p style="text-align: center;">From the initial consultation to the final walkthrough, we keep our clients informed every step of the way to ensure that expectations are met and exceeded.</p>
+                <p style="text-align: center; line-height: 1.6em;">From the initial consultation to the final walkthrough, we keep our clients informed every step of the way to ensure that expectations are met and exceeded.</p>
             </div>
         </div>
     </section>
