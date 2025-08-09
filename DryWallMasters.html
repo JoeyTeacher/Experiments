@@ -97,7 +97,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      display: flex;
+      display: none; /* Hidden by default, controlled by media queries */
       gap: 32px;
     }
     
@@ -123,8 +123,8 @@
       justify-content: center;
       text-align: center;
       color: var(--text-light);
-      /* Updated hero image URL */
-      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://i.imgur.com/H3ZYMip.jpg') no-repeat center center/cover; 
+      /* Updated hero image URL and significantly reduced overlay opacity */
+      background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), url('https://i.imgur.com/7unPCMC.jpg') no-repeat center center/cover; 
     }
     
     .hero-content {
@@ -168,21 +168,21 @@
     }
 
     .content-section {
-      padding: 56px 0;
+      padding: 40px 0; /* Reduced padding for all content sections */
     }
 
     .content-section h2 {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      margin-bottom: 40px;
+      margin-bottom: 30px; /* Reduced margin */
       font-size: 38px;
     }
 
     .grid-layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 48px;
+      gap: 30px; /* Reduced gap */
       align-items: start;
     }
 
@@ -201,7 +201,7 @@
         object-fit: cover; /* Cover the area, cropping if necessary */
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        margin-bottom: 40px; /* Space below the banner */
+        margin-bottom: 30px; /* Reduced margin */
     }
 
     /* New styles for service cards */
@@ -350,7 +350,7 @@
 
     .contact-form-section {
       background-color: var(--page-bg-color);
-      padding: 56px 0;
+      padding: 40px 0; /* Reduced padding */
       text-align: center;
     }
 
@@ -594,11 +594,12 @@
         font-weight: 700;
     }
 
+    /* Removed Jeff's bio section as per the request to focus on the business, not individuals */
     /* New sections for Why Choose Us and Testimonials */
     .why-choose-us-section,
     .testimonials-section {
         background-color: var(--page-bg-color);
-        padding: 56px 0;
+        padding: 40px 0; /* Reduced padding */
         text-align: center;
     }
 
@@ -607,7 +608,7 @@
         padding: 0;
         margin: 0;
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* All on one line for desktop */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted for 6 panels */
         gap: 30px;
         text-align: center; /* Center content within why-choose-us-item */
     }
@@ -644,36 +645,55 @@
         color: var(--primary-text-color);
     }
 
+    .testimonial-carousel-container {
+        position: relative;
+        max-width: 800px; /* Constrain carousel width */
+        margin: 0 auto;
+        overflow: hidden; /* Hide overflowing testimonials */
+        padding: 20px 0; /* Add some vertical padding */
+        display: flex; /* Use flex to arrange items and controls */
+        align-items: center; /* Vertically align items */
+        justify-content: center; /* Center content horizontally */
+    }
+
+    .testimonial-carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%; /* Ensure flex container takes full width */
+        flex-shrink: 0; /* Prevent carousel from shrinking */
+    }
+
     .testimonial-card {
-        background-color: var(--card-bg-color);
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-        text-align: left;
+        flex-shrink: 0; /* Prevent cards from shrinking */
+        width: 100%; /* Each card takes full width of container */
+        box-sizing: border-box; /* Include padding in width */
+        padding: 30px 40px; /* Increased padding for better readability */
+        text-align: center; /* Center text within the card */
         font-style: italic;
         position: relative;
+        color: var(--primary-text-color);
     }
 
     .testimonial-card::before {
         content: '“';
-        font-family: serif; /* Use a serif font for a classic quote look */
-        font-size: 70px; /* Larger quote mark */
+        font-family: serif;
+        font-size: 70px;
         color: var(--secondary-text-color);
         position: absolute;
-        top: 0px; /* Adjust position */
-        left: 15px; /* Adjust position */
+        top: 0px;
+        left: 50%; /* Center the quote mark */
+        transform: translateX(-50%); /* Adjust for exact centering */
         line-height: 0;
-        opacity: 0.3; /* Make it subtle */
-        z-index: 0; /* Ensure text is above it */
+        opacity: 0.3;
+        z-index: 0;
     }
 
     .testimonial-card p {
-        margin-top: 20px; /* Push text down from large quote mark */
+        margin-top: 20px;
         margin-bottom: 10px;
         font-size: 18px;
-        color: var(--primary-text-color);
-        position: relative; /* Ensure text is above pseudo-element */
+        line-height: 1.6;
+        position: relative;
         z-index: 1;
     }
 
@@ -682,6 +702,58 @@
         font-style: normal;
         color: var(--accent-blue);
         font-size: 16px;
+        display: block; /* Ensure author is on its own line */
+        margin-top: 10px;
+    }
+
+    .carousel-controls-bottom {
+        display: flex;
+        justify-content: center; /* Center the entire control group */
+        align-items: center;
+        margin-top: 20px; /* Space from testimonials */
+        width: 100%; /* Take full width for centering */
+    }
+
+    .carousel-nav-btn {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+        flex-shrink: 0; /* Prevent buttons from shrinking */
+        margin: 0 5px; /* Adjusted margin to 5px for closer spacing */
+    }
+
+    .carousel-nav-btn:hover {
+        background-color: var(--accent-blue);
+    }
+
+    .carousel-dots-container {
+        text-align: center;
+        display: flex; /* Use flex for dots themselves */
+        justify-content: center; /* Center dots within their container */
+        align-items: center; /* Vertically align dots */
+        flex-grow: 1; /* Allow dots to take up available space */
+    }
+
+    .carousel-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: var(--secondary-text-color);
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+        background-color: var(--accent-blue);
+        transform: scale(1.2);
     }
 
     /* Responsive adjustments */
@@ -699,37 +771,126 @@
       }
     }
 
+    /* --- Desktop Styles (1024px and up) --- */
+    @media (min-width: 1024px) {
+      .nav-menu {
+        display: flex !important; /* Show desktop nav */
+      }
+      .hamburger-menu {
+        display: none !important; /* Hide hamburger on desktop */
+      }
+      .header-left-area {
+        display: flex; /* Ensure desktop spacing */
+      }
+      .header-right-area {
+        flex-grow: 1;
+        flex-basis: 0;
+        justify-content: flex-end;
+      }
+      .logo-link {
+        width: auto;
+        text-align: left;
+      }
+      .logo-image {
+        margin: 0;
+      }
+      .header-nav .inner-header-container {
+        flex-direction: row;
+        padding: 0 24px;
+      }
+      .header-nav {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .why-choose-us-list {
+          grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens for 6 panels */
+      }
+      .mobile-nav-drawer {
+        display: none !important; /* Ensure mobile drawer is hidden */
+      }
+    }
+
+    /* --- Mobile/Tablet Styles (max-width: 1023px) --- */
     @media (max-width: 1023px) {
       .nav-menu {
-        display: none; /* Hide desktop nav on smaller screens */
+        display: none !important; /* Hide desktop nav on mobile/tablet */
+      }
+      .hamburger-menu {
+        display: block !important; /* Show hamburger on mobile/tablet */
       }
       .header-left-area {
         display: none; /* Hide left spacer on mobile */
       }
       .header-right-area {
-        flex-grow: 0; /* Don't grow on mobile */
-        width: 100%; /* Take full width */
-        justify-content: center; /* Center nav menu on mobile if it's visible */
-        order: 1; /* Push to bottom if wrapped */
-        margin-top: 10px; /* Add some space if wrapped */
+        flex-grow: 0;
+        width: 100%;
+        justify-content: center;
+        order: 1;
+        margin-top: 10px;
       }
       .logo-link {
         width: 100%;
-        text-align: center; /* Center logo on mobile */
+        text-align: center;
       }
       .logo-image {
-        margin: 0 auto; /* Center image within its link/container */
+        margin: 0 auto;
       }
-      .header-nav .inner-header-container { /* Adjust inner container for mobile */
-        padding: 0; /* Remove horizontal padding */
-        flex-direction: column; /* Stack items */
+      .header-nav .inner-header-container {
+        padding: 0;
+        flex-direction: column;
       }
       .header-nav {
-        padding-left: 24px; /* Apply padding directly to nav for mobile */
-        padding-right: 24px; /* Apply padding directly to nav for mobile */
+        padding-left: 24px;
+        padding-right: 24px;
       }
       .why-choose-us-list {
           grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+      }
+      /* Mobile Navigation drawer styles */
+      .mobile-nav-drawer {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Start off-screen */
+        width: 70%;
+        height: 100%;
+        background-color: var(--header-footer-bg);
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        transition: left 0.3s ease-in-out;
+        z-index: 10002;
+        display: none; /* Hidden by default, toggled by JS */
+        flex-direction: column;
+        padding-top: 60px;
+      }
+
+      .mobile-nav-drawer.is-open {
+        left: 0; /* Slide in */
+        display: flex; /* Make visible when open */
+      }
+      /* Mobile specific layout for carousel controls */
+      .testimonial-carousel-container {
+        flex-direction: column; /* Stack items vertically */
+      }
+      .testimonial-carousel {
+        order: 0; /* Carousel first */
+      }
+      .carousel-nav-btn {
+        position: static; /* Remove absolute positioning */
+        transform: none; /* Remove transform */
+        margin: 10px auto; /* Center buttons below carousel */
+        width: 50px; /* Make buttons a bit wider for mobile */
+        height: 50px; /* Make buttons a bit taller for mobile */
+      }
+      .prev-btn {
+        order: 1; /* Place after carousel */
+      }
+      .next-btn {
+        order: 2; /* Place after prev button */
+      }
+      .carousel-dots-container {
+        order: 3; /* Place dots last */
+        margin-top: 10px; /* Space from buttons */
+        margin-left: auto; /* Center dots */
+        margin-right: auto; /* Center dots */
       }
     }
 
@@ -754,10 +915,6 @@
         transform: translateX(-50%);
         top: 16px;
       }
-      .jeff-image {
-        margin-bottom: 20px; /* Add space below image on small screens */
-        margin-right: 0;
-      }
       .why-choose-us-list {
           grid-template-columns: 1fr; /* Stack on small screens */
       }
@@ -781,10 +938,20 @@
             <li><a href="#services-section">Services</a></li>
             <li><a href="#emailInput">Contact</a></li>
           </ul>
+          <div class="hamburger-menu" id="hamburgerMenu">
+            <i class="fas fa-bars"></i>
+          </div>
         </div>
       </div>
-      <!-- Hamburger menu for mobile will be implemented with JS if needed -->
     </nav>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <div class="close-btn" id="closeNavDrawer">&times;</div>
+      <ul class="nav-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="#services-section">Services</a></li>
+        <li><a href="#emailInput">Contact</a></li>
+      </ul>
+    </div>
   </header>
   <main>
     <section class="hero-section">
@@ -823,7 +990,7 @@
           </div>
         </div>
         <div class="service-card" onclick="toggleServiceDescription(this)">
-          <i class="fas fa-cloud-sun icon"></i>
+          <i class="fas fa-eraser icon"></i> <!-- Changed icon to fa-eraser -->
           <h4>Popcorn Ceiling Removal</h4>
           <div class="service-description">
             <p>Modernize your home by safely and efficiently removing outdated popcorn textures for a sleek, contemporary look.</p>
@@ -899,7 +1066,7 @@
         <a href="#emailInput" class="cta-button">Get Your Free Estimate!</a>
       </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="content-section container">
         <h2>About Drywall Masters</h2>
         <div class="grid-layout">
@@ -908,7 +1075,7 @@
                     <img src="https://i.imgur.com/BpBW3k9.jpg" alt="Drywall contractor inspecting finished wall - Our Expertise" class="content-image">
                 </div>
                 <h4 class="about-headline">Our Expertise</h4>
-                <p>Drywall Masters LLC is a locally owned and operated drywall contractor. We're highly skilled in all aspects of drywall installation and repair. We're always committed to doing the highest quality work. We serve the entire Twin Cities area.</p>
+                <p>Drywall Masters LLC is a locally owned and operated drywall contractor. We're highly skilled in all aspects of drywall installation and repair. We're always committed to doing the highest quality work. We serve the entire Twin Cities area. With <strong>over 7,000 hours and 12 years of experience</strong> honing our craft, you can rest assured that you're in good hands.</p>
             </div>
             <div class="grid-cell">
                 <div class="about-image-wrapper">
@@ -919,8 +1086,7 @@
             </div>
         </div>
     </section>
-    <hr>
-    <!-- Removed Jeff's bio section as per the request to focus on the business, not individuals -->
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="why-choose-us-section">
         <div class="container">
             <h2>Why Choose Drywall Masters?</h2>
@@ -945,36 +1111,61 @@
                     <h4>Fully Insured for Your Peace of Mind</h4>
                     <p>Concerned about the unexpected? We're fully insured, protecting your home and your investment.</p>
                 </li>
+                <li class="why-choose-us-item">
+                    <i class="fas fa-award icon"></i> <!-- Icon for Experience -->
+                    <h4>Extensive Experience</h4>
+                    <p>With over 12 years honing our craft, you can rest assured your project is in expert hands.</p>
+                </li>
+                <li class="why-choose-us-item">
+                    <i class="fas fa-users-gear icon"></i> <!-- Icon for Customer-Centric -->
+                    <h4>Customer-Centric Approach</h4>
+                    <p>Your satisfaction is our priority. We listen, communicate, and tailor solutions to your unique needs.</p>
+                </li>
             </ul>
         </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="testimonials-section">
         <div class="container">
             <h2>What Our Clients Say</h2>
-            <div class="grid-layout">
-                <div class="grid-cell">
+            <div class="testimonial-carousel-container">
+                <div class="testimonial-carousel">
                     <div class="testimonial-card">
                         <p>"Drywall Masters transformed our space! The attention to detail and professional finish exceeded our expectations. Highly recommend their expertise."</p>
                         <span class="testimonial-author">- A Satisfied Homeowner, Otsego, MN</span>
                     </div>
-                </div>
-                <div class="grid-cell">
                     <div class="testimonial-card">
                         <p>"Quick, clean, and incredible results. Drywall Masters handled our repair seamlessly, and you can't even tell there was ever any damage. Fantastic work!"</p>
                         <span class="testimonial-author">- Local Business Owner, Minneapolis, MN</span>
                     </div>
-                </div>
-                <div class="grid-cell">
                     <div class="testimonial-card">
                         <p>"From start to finish, the process was smooth and stress-free. The team was professional, and our new walls look absolutely perfect. Thank you!"</p>
                         <span class="testimonial-author">- Happy Client, St. Paul, MN</span>
                     </div>
+                     <div class="testimonial-card">
+                        <p>"The team was incredibly efficient and respectful of our home. The quality of work is outstanding. We'll definitely call Drywall Masters again!"</p>
+                        <span class="testimonial-author">- John D., Blaine, MN</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"I was impressed by their professionalism and the fair pricing. My water-damaged ceiling looks brand new. A truly reliable contractor."</p>
+                        <span class="testimonial-author">- Maria S., Coon Rapids, MN</span>
+                    </div>
                 </div>
+            </div>
+            <div class="carousel-controls-bottom">
+                <button class="carousel-nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-dots-container">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+                <button class="carousel-nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="content-section container">
         <h2>Gallery</h2>
         <div class="gallery-grid"> <!-- Using gallery-grid for consistent gallery layout -->
@@ -992,10 +1183,10 @@
             </div>
         </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="content-section container" id="service-areas-section">
         <h2>Service Areas</h2>
-        <p style="text-align: center; font-size: 1.1em; line-height: 1.6;">Drywall Masters LLC proudly serves the entire **Twin Cities metropolitan area**, including but not limited to:</p>
+        <p style="text-align: center; font-size: 1.1em; line-height: 1.6;">Drywall Masters LLC proudly serves the entire <strong>Twin Cities metropolitan area</strong>, including but not limited to:</p>
         <div class="grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); text-align: center;">
             <ul style="list-style: none; padding: 0; margin: 0;">
                 <li>Minneapolis</li>
@@ -1023,7 +1214,7 @@
             </ul>
         </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="contact-form-section">
       <div class="container">
         <h2>Contact Us</h2>
@@ -1079,7 +1270,7 @@
         </div>
       </div>
     </section>
-    <hr>
+    <hr style="margin: 40px auto;"> <!-- Consistent margin for HR -->
     <section class="content-section container">
         <h2>Connect With Us</h2>
         <div class="social-links">
@@ -1091,14 +1282,6 @@
             </a>
         </div>
     </section>
-  </main>
-  <hr>
-  <footer>
-    <div class="footer container">
-      <p>Copyright © 2025 Drywall Masters LLC - All Rights Reserved.</p>
-      <hr class="footer-divider">
-      <p>Powered by <a href="https://www.godaddy.com/" target="_blank">GoDaddy</a></p>
-    </div>
   </footer>
 
   <script>
@@ -1157,6 +1340,80 @@
     function toggleServiceDescription(cardElement) {
         cardElement.classList.toggle('is-expanded');
     }
+
+    // Mobile navigation toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerMenu = document.getElementById('hamburgerMenu');
+      const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+      const closeNavDrawer = document.getElementById('closeNavDrawer');
+
+      if (hamburgerMenu && mobileNavDrawer && closeNavDrawer) {
+        hamburgerMenu.addEventListener('click', () => {
+          mobileNavDrawer.classList.add('is-open');
+          document.body.style.overflow = 'hidden'; /* Prevent scrolling when drawer is open */
+        });
+
+        closeNavDrawer.addEventListener('click', () => {
+          mobileNavDrawer.classList.remove('is-open');
+          document.body.style.overflow = ''; /* Re-enable scrolling */
+        });
+
+        // Close drawer when a link is clicked
+        mobileNavDrawer.querySelectorAll('.nav-menu a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileNavDrawer.classList.remove('is-open');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    });
+
+    // Testimonial Carousel Logic
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-carousel .testimonial-card');
+    const totalTestimonials = testimonials.length;
+    const carousel = document.querySelector('.testimonial-carousel');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function showTestimonial(index) {
+        if (index >= totalTestimonials) {
+            currentTestimonial = 0;
+        } else if (index < 0) {
+            currentTestimonial = totalTestimonials - 1;
+        } else {
+            currentTestimonial = index;
+        }
+
+        carousel.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+
+        dots.forEach((dot, i) => {
+            if (i === currentTestimonial) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    // Event listeners for carousel navigation
+    document.querySelector('.prev-btn').addEventListener('click', () => {
+        showTestimonial(currentTestimonial - 1);
+    });
+
+    document.querySelector('.next-btn').addEventListener('click', () => {
+        showTestimonial(currentTestimonial + 1);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showTestimonial(index);
+        });
+    });
+
+    // Initialize carousel on load
+    document.addEventListener('DOMContentLoaded', () => {
+        showTestimonial(0);
+    });
   </script>
 </body>
 </html>
